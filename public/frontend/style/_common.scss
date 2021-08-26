@@ -1,0 +1,501 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+.hidden{
+  display: none;
+}
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto
+}
+
+.imgc{display: block;position: relative;overflow: hidden;z-index: 1;&:before{content: '';display: block;padding-bottom: 100%}img{position: absolute;z-index: 1;top: 0;left: 0;width: 100%;height: 100%;object-fit: cover;}}
+.imgc0{display: block;position: relative;overflow: hidden;z-index: 1;&:before{content: '';display: block;padding-bottom: 100%}img{position: absolute;z-index: 1;top: 0;left: 0;width: 100%;height: 100%;object-fit: scale-down;}}
+
+strong, b{
+  font-weight: 600;
+}
+
+*[disabled] {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: .5;
+}
+
+* {
+  outline: none !important;
+  text-decoration: none !important;
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style-type: none;
+  }
+}
+select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+a {
+  color: $primary;
+
+  &:hover {
+    color: $secondary;
+  }
+}
+
+.cb {
+  clear: both;
+}
+
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+//Pagination
+.section-pagination{
+  text-align: center;
+  margin: 20px;
+  ul{
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      li{
+          a{
+              height: 45px;
+              width: 45px;
+              border-radius: 6px;
+              border: 1px solid #fff;
+              color: #fff;
+              font-size: 15px;
+              font-weight: 300;
+              display: inline-block;
+              text-align: center;
+              line-height: 45px;
+              margin: 3px 4px;
+          }
+          &:hover{
+              a{border-color: $secondary;
+                  color: $secondary;}
+          }
+          &.active{
+              a{
+                  border-color: $secondary;
+                  color: #fff;
+                  background: $secondary;
+              }
+          }
+      }
+  }
+}
+@media(max-width: 991px){
+  .section-pagination ul li a{
+    height: 35px;
+    width: 35px;
+    font-size: 14px;
+    line-height: 35px;
+    margin: 3px;
+  }
+}
+
+/*Ring Phone*/
+.ringfixed {
+  position: fixed;
+  bottom: 0;
+  left: -50px;
+  z-index: 9;
+  @include scale(0.8);
+}
+
+.ring-alo-ph-circle {
+  width: 160px;
+  height: 160px;
+  top: 20px;
+  left: 20px;
+  position: fixed;
+  background-color: transparent;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  border: 2px solid rgba(30, 30, 30, 0.4);
+  opacity: .1;
+  -webkit-animation: ring-alo-circle-anim 1.2s infinite ease-in-out;
+  -moz-animation: ring-alo-circle-anim 1.2s infinite ease-in-out;
+  -ms-animation: ring-alo-circle-anim 1.2s infinite ease-in-out;
+  -o-animation: ring-alo-circle-anim 1.2s infinite ease-in-out;
+  animation: ring-alo-circle-anim 1.2s infinite ease-in-out;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+}
+
+.ring-alo-phone {
+  background-color: transparent;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  z-index: 200000 !important;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  -webkit-transition: visibility .5s;
+  -moz-transition: visibility .5s;
+  -o-transition: visibility .5s;
+  transition: visibility .5s;
+  right: 150px;
+  top: 30px;
+}
+
+.ring-alo-phone.ring-alo-green .ring-alo-ph-circle-fill {
+  background-color: rgba(0, 175, 242, 0.5);
+  opacity: .75 !important;
+}
+
+.ring-alo-ph-circle-fill {
+  width: 100px;
+  height: 100px;
+  top: 50px;
+  left: 50px;
+  position: absolute;
+  background-color: #000;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  opacity: .1;
+  -webkit-animation: ring-alo-circle-fill-anim 2.3s infinite ease-in-out;
+  -moz-animation: ring-alo-circle-fill-anim 2.3s infinite ease-in-out;
+  -ms-animation: ring-alo-circle-fill-anim 2.3s infinite ease-in-out;
+  -o-animation: ring-alo-circle-fill-anim 2.3s infinite ease-in-out;
+  animation: ring-alo-circle-fill-anim 2.3s infinite ease-in-out;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+}
+
+.ring-alo-ph-img-circle {
+  width: 60px;
+  height: 60px;
+  top: 70px;
+  left: 70px;
+  position: absolute;
+  background: rgba(30, 30, 30, 0.1) url('../images/icon/icon-ringphone.png') no-repeat center center;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  opacity: .7;
+  -webkit-animation: ring-alo-circle-img-anim 1s infinite ease-in-out;
+  -moz-animation: ring-alo-circle-img-anim 1s infinite ease-in-out;
+  -ms-animation: ring-alo-circle-img-anim 1s infinite ease-in-out;
+  -o-animation: ring-alo-circle-img-anim 1s infinite ease-in-out;
+  animation: ring-alo-circle-img-anim 1s infinite ease-in-out;
+}
+
+.ring-alo-phone.ring-alo-green .ring-alo-ph-img-circle {
+  background-color: #00aff2;
+}
+
+.ring-alo-phone.ring-alo-green .ring-alo-ph-circle {
+  border-color: #00aff2;
+  opacity: .5;
+}
+
+.ring-alo-phone.ring-alo-green.ring-alo-hover .ring-alo-ph-circle,
+.ring-alo-phone.ring-alo-green:hover .ring-alo-ph-circle {
+  border-color: #75eb50;
+  opacity: .5;
+}
+
+.ring-alo-phone.ring-alo-green.ring-alo-hover .ring-alo-ph-circle-fill,
+.ring-alo-phone.ring-alo-green:hover .ring-alo-ph-circle-fill {
+  background-color: rgba(117, 235, 80, 0.5);
+  opacity: .75 !important;
+}
+
+.ring-alo-phone.ring-alo-green.ring-alo-hover .ring-alo-ph-img-circle,
+.ring-alo-phone.ring-alo-green:hover .ring-alo-ph-img-circle {
+  background-color: #75eb50;
+}
+
+@-moz-keyframes ring-alo-circle-anim {
+  0% {
+    transform: rotate(0) scale(.5) skew(1deg);
+    opacity: .1
+  }
+  30% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .5
+  }
+  100% {
+    transform: rotate(0) scale(1) skew(1deg);
+    opacity: .1
+  }
+}
+
+@-webkit-keyframes ring-alo-circle-anim {
+  0% {
+    transform: rotate(0) scale(.5) skew(1deg);
+    opacity: .1
+  }
+  30% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .5
+  }
+  100% {
+    transform: rotate(0) scale(1) skew(1deg);
+    opacity: .1
+  }
+}
+
+@-o-keyframes ring-alo-circle-anim {
+  0% {
+    transform: rotate(0) scale(.5) skew(1deg);
+    opacity: .1
+  }
+  30% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .5
+  }
+  100% {
+    transform: rotate(0) scale(1) skew(1deg);
+    opacity: .1
+  }
+}
+
+@keyframes ring-alo-circle-anim {
+  0% {
+    transform: rotate(0) scale(.5) skew(1deg);
+    opacity: .1
+  }
+  30% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .5
+  }
+  100% {
+    transform: rotate(0) scale(1) skew(1deg);
+    opacity: .1
+  }
+}
+
+@-moz-keyframes ring-alo-circle-fill-anim {
+  0% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .2
+  }
+  50% {
+    transform: rotate(0) scale(1) skew(1deg);
+    opacity: .2
+  }
+  100% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .2
+  }
+}
+
+@-webkit-keyframes ring-alo-circle-fill-anim {
+  0% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .2
+  }
+  50% {
+    transform: rotate(0) scale(1) skew(1deg);
+    opacity: .2
+  }
+  100% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .2
+  }
+}
+
+@-o-keyframes ring-alo-circle-fill-anim {
+  0% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .2
+  }
+  50% {
+    transform: rotate(0) scale(1) skew(1deg);
+    opacity: .2
+  }
+  100% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .2
+  }
+}
+
+@keyframes ring-alo-circle-fill-anim {
+  0% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .2
+  }
+  50% {
+    transform: rotate(0) scale(1) skew(1deg);
+    opacity: .2
+  }
+  100% {
+    transform: rotate(0) scale(.7) skew(1deg);
+    opacity: .2
+  }
+}
+
+@-moz-keyframes ring-alo-circle-img-anim {
+  0% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+  10% {
+    transform: rotate(-25deg) scale(1) skew(1deg)
+  }
+  20% {
+    transform: rotate(25deg) scale(1) skew(1deg)
+  }
+  30% {
+    transform: rotate(-25deg) scale(1) skew(1deg)
+  }
+  40% {
+    transform: rotate(25deg) scale(1) skew(1deg)
+  }
+  50% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+  100% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+}
+
+@-webkit-keyframes ring-alo-circle-img-anim {
+  0% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+  10% {
+    transform: rotate(-25deg) scale(1) skew(1deg)
+  }
+  20% {
+    transform: rotate(25deg) scale(1) skew(1deg)
+  }
+  30% {
+    transform: rotate(-25deg) scale(1) skew(1deg)
+  }
+  40% {
+    transform: rotate(25deg) scale(1) skew(1deg)
+  }
+  50% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+  100% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+}
+
+@-o-keyframes ring-alo-circle-img-anim {
+  0% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+  10% {
+    transform: rotate(-25deg) scale(1) skew(1deg)
+  }
+  20% {
+    transform: rotate(25deg) scale(1) skew(1deg)
+  }
+  30% {
+    transform: rotate(-25deg) scale(1) skew(1deg)
+  }
+  40% {
+    transform: rotate(25deg) scale(1) skew(1deg)
+  }
+  50% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+  100% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+}
+
+@keyframes ring-alo-circle-img-anim {
+  0% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+  10% {
+    transform: rotate(-25deg) scale(1) skew(1deg)
+  }
+  20% {
+    transform: rotate(25deg) scale(1) skew(1deg)
+  }
+  30% {
+    transform: rotate(-25deg) scale(1) skew(1deg)
+  }
+  40% {
+    transform: rotate(25deg) scale(1) skew(1deg)
+  }
+  50% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+  100% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+}
+
+/*Ring Phone*/

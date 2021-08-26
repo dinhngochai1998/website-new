@@ -1,0 +1,92 @@
+#service-wrapper{
+    padding-top: 120px;
+    overflow: hidden;
+    .service-title{
+        font-size: 3rem;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+    .service-text{
+        text-transform: uppercase;
+        font-size: 18px;
+        font-weight: 300;
+        margin-bottom: 40px;
+    }
+    .service-list{
+        @extend %d-flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+        .box-item{
+            width: calc(100%/3);
+            padding: 0 10px;
+            margin-bottom: 30px;
+            .item-title{
+                text-align: center;
+                font-size: 1.8rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                margin-bottom: 15px;
+            }
+            &:hover{
+                .item-img{
+                    img{
+                        transform: scale(1.1);
+                        opacity: 0.7;
+                    }
+                }
+            }
+            .item-img{
+                img{
+                    transition: all .3s ease-in-out;
+                }
+                .imgc:before{
+                    padding-bottom: calc(352/472*100%);
+                }
+            }
+            .item-body{
+                padding-top: 20px;
+                .desc{
+                    font-size: 15px;
+                    line-height: 22px;
+                    height: 88px;
+                    overflow: hidden;
+                }
+                .btn-view-more{
+                    margin-top: 20px;
+                    @extend %btn-animation;
+                    a{
+                        font-weight: 300;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 991px){
+    #service-wrapper{
+        .service-list{
+            .box-item{
+                width: 50%;
+            }
+        }
+    }
+}
+
+@media (max-width: 767px){
+    #service-wrapper{
+        .service-title{
+            font-size: 24px;
+        }
+        .service-text{
+            font-size: 16px;
+            line-height: 24px;
+        }
+        .service-list{
+            .box-item{
+                width: 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+#research-wrapper{
+    padding-top: 130px;
+    .research-title{
+        font-size: 3rem;
+        font-weight: 500;
+        margin-bottom: 30px;
+    }
+    .post-content{
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 767px){
+    #research-wrapper .research-title{font-size: 26px;}
+}

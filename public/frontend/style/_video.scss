@@ -1,0 +1,99 @@
+#video-wrapper{
+    overflow: hidden;
+    .video-detail{
+        padding-top: 130px;
+        margin-bottom: 80px;
+        .imgc{
+            &:before{
+                padding-bottom: calc(9/16*100%);
+            }
+            iframe{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+        }
+    }
+    .list-video{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+        .box-item{
+            width: calc(100%/4);
+            padding: 0 10px;
+            margin-bottom: 20px;
+            .item{
+                &:hover{
+                    img{
+                        transform: scale(1.1);
+                        opacity: .7;
+                    }
+                }
+                .item-img{
+                    .imgc{
+                        &::before{
+                            padding-bottom: calc(9/16*100%);
+                        }
+                    }
+                    img{
+                        transition: all .3s ease-in-out;
+                    }
+                }
+                .item-body{
+                    padding-top: 10px;
+                    a{
+                        font-size: 15px;
+                        line-height: 20px;
+                        height: 40px;
+                        overflow: hidden;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 991px){
+    #video-wrapper{
+        .list-video{
+            .box-item{
+                width: calc(100%/3);
+            }
+        }
+    }
+}
+@media (max-width: 767px){
+    #video-wrapper{
+        .video-detail{
+            margin-bottom: 40px;
+        }
+        .list-video{
+            .box-item{
+                width: 100%;
+                .item{
+                    display: flex;
+                    flex-wrap: wrap;
+                    .item-img{
+                        width: 42%;
+                    }
+                    .item-body{
+                        width: 58%;
+                        padding-top: 0;
+                        padding-left: 15px;
+                        .item-title{
+                            a{
+                                height: 80px;
+                                font-size: 14px;
+                                font-weight: 300;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

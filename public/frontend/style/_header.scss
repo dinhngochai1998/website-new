@@ -1,0 +1,207 @@
+#header{
+    position: relative;
+    z-index: 3;
+    .ss-navbar{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        &.active{
+            .ss-navbar-menu{
+                transform: translateY(0);
+            }
+            .ss-navbar-toggle{
+                .icon-animate1{
+                    transform: translate(5px, 5px);
+                }
+                .icon-animate2{
+                    transform: translate(5px, -5px);
+                }
+                .icon-animate3{
+                    transform: translate(-5px, 5px);
+                }
+                .icon-animate4{
+                    transform: translate(-5px, -5px);
+                }
+            }
+        }
+        &-menu{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.7);
+            transition: all .3s ease-in-out;
+            // transform: translateY(-92px);
+            >ul{
+                @extend %d-flex;
+                justify-content: flex-end;
+                padding-right: 210px;
+                >li{
+                    margin: 0 15px;
+                    position: relative;
+                    >i{display: none;}
+                    &:hover{
+                        >ul{
+                            visibility: visible;
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                    >a{
+                        display: inline-block;
+                        padding: 36px 0;
+                        font-size: 1.6rem;
+                        font-weight: 300;
+                        text-transform: uppercase;
+                    }
+                    >ul{
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background-color: rgba(0,0,0,0.7);
+                        transition: all .3s ease-in-out;
+                        transform: translateY(15px);
+                        opacity: 0;
+                        min-width: 220px;
+                        visibility: hidden;
+                        >li{
+                            border-top: 1px solid #999;
+                            >a{
+                                display: block;
+                                padding: 8px 20px;
+                                font-size: 1.5rem;
+                                line-height: 22px;
+                                font-weight: 300;
+                                text-transform: uppercase;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &-toggle{
+            color: #fff;
+            fill: #fff;
+            position: absolute;
+            top: 33px;
+            right: 30px;
+            cursor: pointer;
+            z-index: 1;
+            display: none;
+            rect{
+                width: 4px !important;
+                height: 4px !important;
+            }
+        }
+        &-logo{
+            position: absolute;
+            top: 10px;
+            left: 210px;
+            z-index: 1;
+            a{
+                display: inline-block;
+                img{
+                    max-width: 70px;
+                }
+            }
+        }
+    }
+}
+
+.icon-animate1, .icon-animate2, .icon-animate3, .icon-animate4{transition: transform .5s cubic-bezier(0.23, 1, 0.32, 1);}
+
+@media (max-width: 1500px) and (min-width: 1200px){
+    #header{
+        .ss-navbar-menu{
+            >ul{
+                padding-right: 150px;
+                >li{
+                    >a{
+                        padding: 28px 0;
+                    }
+                }
+            }
+        }
+        .ss-navbar-logo{
+            left: 150px;
+            a img{
+                max-width: 55px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1199px){
+    #header{
+        .ss-navbar-logo{
+            left: 20px;
+            a img{max-width: 50px;}
+        }
+        .ss-navbar{
+            height: 70px;
+            transition: all .3s ease-in-out;
+            &.active{
+                background: rgba(0,0,0,0.7);
+                .ss-navbar-menu{
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateX(0);
+                }
+            }
+        }
+        .ss-navbar-toggle{
+            right: 20px;
+            top: 21px;
+            display: block;
+        }
+        .ss-navbar-menu{
+            top: 100%;
+            transform: translateX(100%);
+            opacity: 0;
+            visibility: hidden;
+            >ul{
+                flex-wrap: wrap;
+                padding-right: 0;
+                >li{
+                    width: 100%;
+                    border-top: 1px solid #999;
+                    margin: 0;
+                    position: relative;
+                    >i{
+                        display: block;
+                        width: 43px;
+                        height: 43px;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        text-align: center;
+                        line-height: 43px;
+                        font-size: 16px;
+                    }
+                    >ul{
+                        position: static;
+                        transform: none;
+                        opacity: 1;
+                        visibility: visible;
+                        background: transparent;
+                        display: none;
+                        &.active{
+                            display: block;
+                        }
+                        >li{
+                            >a{
+                                padding-left: 40px;
+                            }
+                        }
+                    }
+                    >a{
+                        padding: 12px 20px;
+                        font-size: 15px;
+                        padding-right: 40px;
+                    }
+                }
+            }
+        }
+    }
+}

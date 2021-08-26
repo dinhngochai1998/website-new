@@ -1,0 +1,25 @@
+@import "mixin";
+@import "common";
+@import "grid";
+@import "font-face";
+
+html{font-size: 10px}
+body{font-size: 15px;font-family: 'Roboto';color: #ffffff;font-weight: 400;background-color: #000000;}
+
+@import "header";
+@import "footer";
+@import "home";
+@import "about";
+@import "project";
+@import "project-detail";
+@import "service";
+@import "service-detail";
+@import "news";
+@import "news-detail";
+@import "video";
+@import "research";
+@import "contact";
+
+@media (max-width: 991px) and (min-width: 768px){
+    html{font-size: 9px;}
+}

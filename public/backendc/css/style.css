@@ -1,0 +1,36 @@
+.btn-warning-edit {
+    background: #f39c12;
+    color: #fff;
+    opacity: .9;
+}
+
+.btn-warning-edit:hover {
+    color: #fff;
+}
+
+.breadcrumb-top-nav {
+    list-style: none;
+    background-color: #fff;
+    border-radius: 25px;
+    position: relative;
+    top: 4px;
+    border: 1px solid #f9f9f9;
+    font-size: 15px;
+    padding: 4px 15px 4px 10px;
+}
+
+.form__file-thumb {
+    width: 200px;
+    height: auto;
+    clear: both;
+    display: block;
+    padding: 2px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.text-red-500 {
+    color: red;
+    font-weight: 500;
+}
