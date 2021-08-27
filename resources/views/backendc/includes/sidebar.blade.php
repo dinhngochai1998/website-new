@@ -14,22 +14,28 @@
                   <img src="{{ asset('backendc/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                  <a href="#" class="d-block">Alexander Pierce</a>
-              </div>
-          </div>
+                  <div class="top-nav notification-row">
+                      <!-- notificatoin dropdown start-->
+                      <ul class="nav pull-right top-menu">
+                          <li class="dropdown">
+                              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                  <span class="profile-ava">
+                                      <img alt="" src="">
+                                  </span>
+                                  <span class="username">
+                                      @if (Auth::user())
+                                      <span>{{ Auth::user()->name }}</span>
+                                      @endif
+                                  </span>
+                                  <b class="caret"></b>
+                              </a>
 
-          <!-- SidebarSearch Form -->
-          <div class="form-inline">
-              <div class="input-group" data-widget="sidebar-search">
-                  <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                  <div class="input-group-append">
-                      <button class="btn btn-sidebar">
-                          <i class="fas fa-search fa-fw"></i>
-                      </button>
+                          </li>
+                      </ul>
                   </div>
               </div>
           </div>
-
+          <!-- SidebarSearch Form -->
           <!-- Sidebar Menu -->
           <nav class="mt-2">
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -89,12 +95,12 @@
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a href="{{ route('post.select') }}" class="nav-link">
+                              <a href="{{ route('userpost.select') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Customer Post</p>
                               </a>
                           </li>
-                      
+
                       </ul>
                   </li>
                   <li class="nav-item">
@@ -159,13 +165,29 @@
                           </p>
                       </a>
                   </li>
+                
                   <li class="nav-item">
                       <a href="" class="nav-link">
-                          <i class="nav-icon fas fa-cogs"></i>
+                      <i class="nav-icon fas fa-cogs"></i>
                           <p>
                               Setting
+                              
                           </p>
                       </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="{{ route('category.select') }}" class="nav-link">
+
+                                  <a href="#" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"> <i class="far fa-circle nav-icon"></i>Logout</a>
+                                  <form id="frm-logout" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                                      {{ csrf_field() }}
+                                  </form>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('user.changepassword') }}"> <i class="far fa-circle nav-icon"></i> ChangePassword</a>
+                          </li>
+                      </ul>
                   </li>
               </ul>
           </nav>

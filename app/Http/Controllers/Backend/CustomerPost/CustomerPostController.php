@@ -15,18 +15,18 @@ class CustomerPostController extends Controller
 
     public function select(Request $request)
     {
-        $getAllCustomerPost = Post::with('categories')->where('status', '=', '2')->get();
+        $getAllCustomerPost = Post::with('categories')->where('status', '=', '2')->paginate(5);
         if ($request->ajax()) {
             $getAllCustomerPost = Post::where('title', 'like', '%' . $request->title . '%')->orwhere('status', '=', '2')->get();
-            $view = view('backend.customerPost.ajax.data', compact('getAllPost'))->render();
+            $view = view('backendc.admin.customerPost.ajax.data', compact('getAllPost'))->render();
             return response()->json(['html' => $view]);
         }
-        return view('backend.customerPost.select', compact('getAllCustomerPost'));
+        return view('backendc.admin.customerPost.index', compact('getAllCustomerPost'));
     }
     public function edit(Request $request)
     {
         $editCustomerPost = Post::where('id', '=', $request->id)->first();
-        return view('backend.customerPost.update', compact('editCustomerPost'));
+        return view('backendc.admin.customerPost.edit', compact('editCustomerPost'));
     }
     public function update(Request $request)
     {

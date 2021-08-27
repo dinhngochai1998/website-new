@@ -29,9 +29,8 @@ class CategoryController extends Controller
     public function create(StoreCategoryRequest $request)
     {
         $NewCategory = $this->category->create($request->validated());
-        
+
         return redirect()->route('category.select')->with('success', Lang::get('message.create', ['model' => 'Category']));
-        
     }
 
     public function select(Request $request)

@@ -56,7 +56,7 @@
                         <h3 class="item-title"><a href="{{ route('home.detail', $value->slug) }}" title="">{{ $value->title  }}</a></h3>
                         <h4 class="desc">
                             {{ $value->description }}
-                        </h4><br><span style="font-size:15px;">{{ $value->created_at }} | {{ $value->count_view }} Lượt xem</span><br><br>
+                        </h4><br><span style="font-size:15px;">{{ $value->created_at }} | {{ $value->count_view }} Lượt xem || <i class="fa fa-thumbs-up" aria-hidden="true"></i>  Like </span><br><br>
                     </div>
 
                     @endforeach
