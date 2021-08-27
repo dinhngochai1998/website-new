@@ -107,4 +107,8 @@ class PostController extends Controller
         ->where('title', 'LIKE', "%$request->search%")->get();
         return view('frontend.search.index',compact('searchPostHome'));
     }
+    public function postDelete(Request $request) {       
+        $this->post->whereIn('id', explode(",", $request->ids))->delete();
+        return response()->json(['success' => "Delete user successful"]);
+    }
 }

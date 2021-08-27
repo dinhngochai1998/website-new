@@ -28,7 +28,7 @@ $(() => {
             toastr.error('Please select row to delete');
         } else {  
             Swal.fire({
-                    title: 'Ddo you want to delete？',
+                    title: 'Do you want to delete？',
                     showDenyButton: true,
                     showCancelButton: true,
                     confirmButtonText: `Delete`,

@@ -19,7 +19,7 @@
                     <div class="col-sm-6" style="padding:30px;">
                         <h1 class="float-left mr-5"><i class="nav-icon fas fa-user"></i> Users</h1>
                         <a href="{{ route('post.index') }}" class="btn btn-success float-left mr-2"><i class="fas fa-plus"></i> Add new</a>
-                        <button class="btn btn-danger float-left delete_all" data-url=""><i class="fas fa-trash"></i> Bulk Delete</button>
+                        <button class="btn btn-danger float-left delete_all" data-url="{{ route('post.post.delete') }}"><i class="fas fa-trash"></i> Bulk Delete</button>
                     </div>
                 </div>
             </div>
@@ -49,17 +49,22 @@
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
-
                                         <tr>
+                                            <th>
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input form__check-all" type="checkbox">
+                                                    </div>
+                                                </div>
+                                            </th>
                                             <th>@sortablelink('title')</th>
                                             <th>@sortablelink('categories.name')</th>
                                             <th>image</th>
                                             <th style="padding-left: 50px;">Action</th>
-                                        </tr>
-                                        </tr>
+                                        </tr>                 
                                     </thead>
                                     <tbody class="list-post">
-                                        @include('backend.post.ajax.data')
+                                        @include('backendc.admin.post.ajax.data')
                                     </tbody>
                                 </table>
                             </div>

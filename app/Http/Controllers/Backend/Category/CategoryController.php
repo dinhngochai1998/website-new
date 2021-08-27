@@ -29,7 +29,9 @@ class CategoryController extends Controller
     public function create(StoreCategoryRequest $request)
     {
         $NewCategory = $this->category->create($request->validated());
+        
         return redirect()->route('category.select')->with('success', Lang::get('message.create', ['model' => 'Category']));
+        
     }
 
     public function select(Request $request)
@@ -60,5 +62,10 @@ class CategoryController extends Controller
     {
         $deleteCategory = $this->category->delete($request->id);
         return redirect()->route('category.select')->with('success', lang::get('messages,Delete', ['model' => 'Category']));
+    }
+    public function categoryDelete(Request $request)
+    {
+        $this->category->whereIn('id', explode(",", $request->ids))->delete();
+        return response()->json(['success' => "Delete user successful"]);
     }
 }

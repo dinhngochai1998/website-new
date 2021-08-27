@@ -19,6 +19,7 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->bind(\App\Repositories\CustomerPostRepository::class, \App\Repositories\Eloquent\CustomerPostRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\CommentRepository::class, \App\Repositories\Eloquent\CommentRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\PostRepository::class, \App\Repositories\Eloquent\PostRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\CustomerRepository::class, \App\Repositories\Eloquent\CustomerRepositoryEloquent::class);
     }
 
     /**

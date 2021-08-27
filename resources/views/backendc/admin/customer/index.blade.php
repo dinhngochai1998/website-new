@@ -1,14 +1,14 @@
-@extends('layouts.backend')
+@extends('layouts.backendc')
 @section('content')
 
 <div class="wrapper">
 
-    @include('backend.includes.navbar-top', [
+    @include('backendc.includes.navbar-top', [
         'list' => 'Customer',
-        'url' => route('backend.admin.customer.show')
+        'url' => route('customer.select')
     ])
 
-    @include('backend.components.alert')
+    @include('backendc.components.alert')
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="min-height: 1875.69px;">
@@ -17,9 +17,9 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6" style="padding:30px;">
-                        <h1 class="float-left mr-5"><i class="nav-icon fas fa-user"></i> Users</h1>
-                        <a href="{{ route('backend.admin.customer.create') }}" class="btn btn-success float-left mr-2"><i class="fas fa-plus"></i> Add new</a>
-                        <button class="btn btn-danger float-left delete_all" data-url="{{ route('backend.admin.customer.customer.delete') }}"><i class="fas fa-trash"></i> Bulk Delete</button>
+                        <h1 class="float-left mr-5"><i class="nav-icon fas fa-user"></i> Customer</h1>
+                        <a href="" class="btn btn-success float-left mr-2"><i class="fas fa-plus"></i> Add new</a>
+                        <button class="btn btn-danger float-left delete_all" data-url=""><i class="fas fa-trash"></i> Bulk Delete</button>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                             <div class="card-header">
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" data-url="{{ route('backend.admin.customer.show') }}" name="table_search" id="search-user" class="form-control float-right" placeholder="Search">
+                                        <input type="text" data-url="{{ route('customer.select') }}" name="table_search" id="search-user" class="form-control float-right" placeholder="Search">
 
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
@@ -58,15 +58,14 @@
                                                     </div>
                                                 </div>
                                             </th>
-                                            <th>Name</th>                           
-                                            <th>email</th>
-                                            <th>verification_code</th>
-                                            <th>verified</th>
-                                            <th>Action</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Avatar</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody id="list-user">
-                                       @include("backend.admin.customer.ajax.search")
+                                       @include("backendc.admin.customer.ajax.search")
                                     </tbody>
                                 </table>
                             </div>
@@ -81,7 +80,7 @@
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers float-right" id="example2_paginate">
-                            @include('backend.components.pagination', ['paginator' => $getCustomer])
+                            @include('backendc.components.pagination', ['paginator' => $customer])
                         </div>
                     </div>
                 </div>

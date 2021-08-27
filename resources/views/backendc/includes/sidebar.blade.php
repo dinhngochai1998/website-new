@@ -81,6 +81,21 @@
                               Customers
                           </p>
                       </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="{{ route('customer.select') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Customer</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('post.select') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Customer Post</p>
+                              </a>
+                          </li>
+                      
+                      </ul>
                   </li>
                   <li class="nav-item">
                       <a href="#" class="nav-link">

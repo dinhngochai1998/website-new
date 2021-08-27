@@ -15,6 +15,7 @@ Route::group(['middleware' => 'role:developer || manager'], function () {
         Route::get('/edit/{id}', 'App\Http\Controllers\Backend\Category\CategoryController@edit')->name('edit');
         Route::patch('/update', 'App\Http\Controllers\Backend\Category\CategoryController@update')->name('update');
         Route::get('/delete{id}', 'App\Http\Controllers\Backend\Category\CategoryController@delete')->name('delete');
+        Route::delete('/post/delete', 'App\Http\Controllers\Backend\Category\CategoryController@categoryDelete')->name('category.delete');
     });
     Route::prefix('post')->name('post.')->group(function () {
         Route::get('/', 'App\Http\Controllers\Backend\Post\PostController@index')->name('index');
@@ -24,6 +25,7 @@ Route::group(['middleware' => 'role:developer || manager'], function () {
         Route::get('/edit/{id}', 'App\Http\Controllers\Backend\Post\PostController@edit')->name('edit');
         Route::patch('/update', 'App\Http\Controllers\Backend\Post\PostController@update')->name('update');
         Route::get('/delete{id}', 'App\Http\Controllers\Backend\Post\PostController@delete')->name('delete');
+        Route::delete('/category/delete', 'App\Http\Controllers\Backend\Post\PostController@postDelete')->name('post.delete');
     });
     Route::prefix('subcategory')->name('subcategory.')->group(function () {
         Route::get('/', 'App\Http\Controllers\Backend\SubCategory\SubCategoryController@index')->name('index');

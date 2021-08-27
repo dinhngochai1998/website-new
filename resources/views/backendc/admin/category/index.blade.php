@@ -4,8 +4,8 @@
 <div class="wrapper">
 
     @include('backendc.includes.navbar-top', [
-        'list' => 'Category',
-        
+    'list' => 'Category',
+
     ])
 
     @include('backendc.components.alert')
@@ -19,7 +19,7 @@
                     <div class="col-sm-6" style="padding:30px;">
                         <h1 class="float-left mr-5"><i class="nav-icon fas fa-user"></i> Category</h1>
                         <a href="{{ route('category.index') }}" class="btn btn-success float-left mr-2"><i class="fas fa-plus"></i> Add new</a>
-                        <button class="btn btn-danger float-left delete_all" data-url=""><i class="fas fa-trash"></i> Bulk Delete</button>
+                        <button class="btn btn-danger float-left delete_all" data-url="{{ route('category.category.delete') }}"><i class="fas fa-trash"></i> Bulk Delete</button>
                     </div>
                 </div>
             </div>
@@ -33,8 +33,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">      
-                                    <input type="text" data-url="{{ route('category.select') }}" name="table_search" id="search-user" class="form-control float-right" placeholder="Search">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="text" data-url="{{ route('category.select') }}" name="table_search" id="search-user" class="form-control float-right" placeholder="Search">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
@@ -47,16 +47,21 @@
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
-                                        <tr>            
-                                        <th>Chọn</th> 
-                                        <th>Name</th>
-                                        <th>slug</th>
-                                        <th>Action</th>                                      
-                                  
+                                        <tr>
+                                            <th>
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input form__check-all" type="checkbox">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th>Name</th>
+                                            <th>slug</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="list-user">
-                                       @include("backendc.admin.category.ajax.search")
+                                        @include("backendc.admin.category.ajax.search")
                                     </tbody>
                                 </table>
                             </div>
@@ -71,7 +76,7 @@
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers float-right" id="example2_paginate">
-                        @include('backendc.components.pagination', ['paginator' => $getCategory])
+                            @include('backendc.components.pagination', ['paginator' => $getCategory])
                         </div>
                     </div>
                 </div>
