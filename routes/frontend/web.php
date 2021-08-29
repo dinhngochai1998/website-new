@@ -32,3 +32,4 @@ Route::prefix('search')->name('search.')->group(function () {
 Route::get('redirect/{driver}', 'App\Http\Controllers\Frontend\Customer\CustomerController@redirectToProvider')->name('login.provider');
 Route::get('/callback/{provider}', 'App\Http\Controllers\Frontend\Customer\CustomerController@callback');
 Route::post('/logout', 'App\Http\Controllers\Frontend\Customer\CustomerController@logout')->name('customer.logout');
+Route::post('/like', 'App\Http\Controllers\Frontend\Like\LikeController@Like')->name('like');
