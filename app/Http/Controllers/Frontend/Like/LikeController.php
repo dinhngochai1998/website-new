@@ -18,9 +18,9 @@ class LikeController extends Controller
 
     public function like(Request $request)
     {
-        $like = Like::where(['customer_id' => Auth::guard('customer')->user()->id, 'post_id' => $request->id_post])->first();
+        $like = Like::where(['post_id' => $request->id_post])->first();
 
-        if ($like) {            
+        if ($like) {
             if ($like->like == 1) {
                 $like->like = 0;
                 $like->save();

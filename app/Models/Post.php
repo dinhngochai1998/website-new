@@ -34,6 +34,10 @@ class Post extends Model
     {
         return $this->belongsTo(Customer::class, 'id_customer');
     }
+    public function like()
+    {
+        return $this->hasMany(Like::class, 'post_id', 'id');
+    }
 
     public static function getNewsOfCategory($idCate) {
        return self::select('posts.*', 'category.name')->join('category', function($join) {
