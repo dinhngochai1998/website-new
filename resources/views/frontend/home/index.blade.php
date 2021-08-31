@@ -58,15 +58,15 @@
                                 {{ $value->description }}
                             </h4>
                             <br>
-                            <span style="font-size:15px;">{{ $value->created_at }} | {{ $value->count_view }} Lượt xem |
-                                <div class="like-block">
+                            <span style="font-size:15px; position: relative;">{{ $value->created_at }} | {{ $value->count_view }} Lượt xem |
+                                <div class="col-xs-6 col-sm-5 col-md-5 col-lg-5 like-block {{ isset($value->like[0]['l']) == 1 ? 'like-color' : '' }} md-3">
+                                    <p class="like-post" data-url="{{ route('like') }}" data-id="{{ $value->id }}">Thích</p>
                                     <i class="fa fa-thumbs-o-up like" aria-hidden="true"></i>
-                                    <a id="like" href="#">Thích</a>
                                 </div>
                             </span>
                             <br>
                             <br>
-                            <input type="hidden" data-url="{{ route('like') }}" name="id_post" id="id_post" value="{{ $value->id }}">
+
                         </div>
 
                         @endforeach
@@ -186,13 +186,15 @@
 </div>
 
 @endsection
-<script src="{{ asset('backend/js/jquery-1.8.3.min.js') }}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
 
 <script>
     $(document).ready(function() {
-        $('#like').click(function() {
-            var id_post = $('#id_post').val();
-            var url = $('#id_post').attr('data-url')
+        $('.like-post').click(function() {
+            var id_post = $(this).attr('data-id');
+            var url = $(this).attr('data-url');
+            var $sliderEdit = $(this);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -204,14 +206,13 @@
                 data: {
                     id_post
                 },
-                async: true,
                 success: function(data) {
-                    if (data.like == 0) {
-                        $('.like').css('color', '#000')
-                        $(this).css('color', '#000')
-                    } else {
-                        $('.like').css('color', 'blue')
-                        $(this).css('color', 'blue')
+
+                    if (data.like.like === 0) {
+                        $sliderEdit.parent().css('color', '#000')
+                    }
+                    if (data.like.like === 1) {
+                        $sliderEdit.parent().css('color', 'blue')
                     }
                 }
             });

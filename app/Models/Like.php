@@ -26,4 +26,5 @@ class Like extends Model
     {
         return $this->belongsTo(customer::class, 'customer_id', 'id');
     }
+   
 }

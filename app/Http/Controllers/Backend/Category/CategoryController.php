@@ -37,7 +37,7 @@ class CategoryController extends Controller
     {
         $getCategory = $this->category->paginate(5);
         if ($request->ajax()) {
-            $getCategory = Category::where('name', 'like', '%' . $request->name . '%')->get();
+            $getCategory = $this->category->where('name', 'like', '%' . $request->name . '%')->get();
             $view = view('backendc.admin.category.ajax.search', compact('getCategory'))->render();
             return response()->json(['html' => $view]);
         }
