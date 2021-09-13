@@ -70,7 +70,7 @@ class PostController extends Controller
     public function update(StorePostRequest $request)
     {
 
-       
+
         $data = $request->validated();
         if ($request->hasFile('image')) {
             $filenameWithExt = $request->file('image')->getClientOriginalName();
@@ -82,12 +82,12 @@ class PostController extends Controller
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             // Upload Image
             $request->file('image')->storeAs('public/avatars', $fileNameToStore);
-
             $data['image'] = $fileNameToStore;
         }
-        
+
         $post = $this->post->update($data, $request->id);
-        $post->save(); 
+        $post->save();
+
         return redirect()->route('post.select')->with('success', Lang::get('messages.update', ['model' => 'Update post']));
     }
 
@@ -100,7 +100,7 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
-        $searchPostHome = Post::with('categories')
+        $searchPostHomePage = Post::with('categories')
             ->where('title', 'LIKE', "%$request->search%")->get();
         return view('frontend.search.index', compact('searchPostHome'));
     }
