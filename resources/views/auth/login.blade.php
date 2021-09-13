@@ -31,7 +31,7 @@
                   <div class="app-form">
                      <span id="error" style="color:red;"></span>
                      <div class="app-form-group">
-                        <input type="text" class="app-form-control" name="email" placeholder="Email" >
+                        <input type="text" class="app-form-control" name="email" placeholder="Email">
                         <span style="color:white;"></span>
                      </div>
                      <div class="app-form-group">
@@ -39,11 +39,16 @@
                         <span style="color:white;"></span>
                      </div>
                      <button type="submit" id="submit-login" class="app-form-button">Đăng nhập</button><br>
+                     <div class="container">
+                        <a href="{{ route('resetpassword.index') }}" style="text-decoration: none;" id="submit-login" class="app-form-button" data-target="#pwdModal" data-toggle="modal">Forgot my password</a>
+                     </div>
                   </div>
-            </form>
+               </form>
+            </div>
          </div>
       </div>
    </div>
 </div>
-</div>
 @endsection
+
+

@@ -18,14 +18,14 @@ class HomeController extends Controller
     {
 
         $getPost = Post::where('status', '=', '1')->orderBy('created_at', 'DESC')->take(1)->first();
-
+        $getPostDataPaginate = Post::paginate(5);
         // $like = Post::with('like')->where(['id_customer' => Auth::guard('customer')->user()->id])->first();
         if($user = Auth::guard('customer')->user()){
             $getPostData = [];
             if ($getPost) {
                 $getPostData = Post::with(['categories', 'like' => function ($q) use ($user) {
                     return $q->select('like AS l', 'post_id', 'customer_id')->where(['like' => 1, 'customer_id' => $user->id]);
-                }])->whereNotIn('id', [$getPost->id])->where('status', '=', '1')->orderBy('created_at', 'DESC')->simplePaginate(4);
+                }])->whereNotIn('id', [$getPost->id])->where('status', '=', '1')->orderBy('created_at', 'DESC')->paginate(4);
             }
         } else {
             $getPostData = Post::with('categories')->whereNotIn('id', [$getPost->id])->where('status', '=', '1')->orderBy('created_at', 'DESC')->simplePaginate(4);
@@ -60,7 +60,7 @@ class HomeController extends Controller
 
         return view('frontend.home.index', compact([
             'getPost', 'getPostData', 'getPostHighLights', 'getPostNews', 'getPostHotNews', 'getPostHotNews1', 'getRecruitment',
-            'getRecruitment1', 'getPostCultural', 'getPostCultural1', 'getPostProject', 'getPostProject1'
+            'getRecruitment1', 'getPostCultural', 'getPostCultural1', 'getPostProject', 'getPostProject1','getPostDataPaginate'
         ]));
     }
     public function detail(Request $request)

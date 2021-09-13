@@ -59,17 +59,25 @@
                             </h4>
                             <br>
                             <span style="font-size:15px; position: relative;">{{ $value->created_at }} | {{ $value->count_view }} Lượt xem |
-                                <div class="col-xs-6 col-sm-5 col-md-5 col-lg-5 like-block {{ isset($value->like[0]['l']) == 1 ? 'like-color' : '' }} md-3">
+                                <div class="col-xs-6 col-sm-5 col-md-5 col-lg-5 like-block {{ isset($value->like[0]['l']) == 1 ? 'like_color' : '' }} md-3">
                                     <p class="like-post" data-url="{{ route('like') }}" data-id="{{ $value->id }}">Thích</p>
                                     <i class="fa fa-thumbs-o-up like" aria-hidden="true"></i>
                                 </div>
                             </span>
                             <br>
                             <br>
-
                         </div>
-
                         @endforeach
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <!-- <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div> -->
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                        <div class="dataTables_paginate paging_simple_numbers float-right" id="example2_paginate">
+                            @include('backendc.components.pagination', ['paginator' => $getPostDataPaginate])
+                        </div>
                     </div>
                 </div>
             </div>

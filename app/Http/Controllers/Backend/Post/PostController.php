@@ -23,7 +23,7 @@ class PostController extends Controller
         $this->category = $category;
     }
     public function index()
-    {   
+    {
         $categories = $this->category->get();
         return view('backendc.admin.post.create', compact('categories'));
     }
@@ -44,25 +44,25 @@ class PostController extends Controller
             $data['image'] = $fileNameToStore;
         }
         $NewPost = $this->post->create($data);
-        $NewPost->save(); 
+        $NewPost->save();
         return redirect()->route('post.select')->with('success', Lang::get('messages.create', ['model' => 'Post']));
     }
 
     public function select(Request $request)
     {
-        
+
         $getAllPost = $this->post->sortable()->with('categories')->orderBy('created_at', 'DESC')->paginate(10);
         if ($request->ajax()) {
-            $getAllPost = $this->post->where('title', 'like', '%'.$request->title.'%')->get();
-    		$view = view('backendc.admin.post.ajax.data',compact('getAllPost'))->render();
-            return response()->json(['html'=>$view]);
+            $getAllPost = $this->post->where('title', 'like', '%' . $request->title . '%')->get();
+            $view = view('backendc.admin.post.ajax.data', compact('getAllPost'))->render();
+            return response()->json(['html' => $view]);
         }
         return view('backendc.admin.post.index', compact('getAllPost'));
     }
 
     public function edit(Request $request)
     {
-        $getCategory = $this->category->get();  
+        $getCategory = $this->category->get();
         $editPost = $this->post->find($request->id);
         return view('backendc.admin.post.edit', compact('editPost', 'getCategory'));
     }
@@ -70,7 +70,8 @@ class PostController extends Controller
     public function update(StorePostRequest $request)
     {
 
-        $updatePost = $this->post->find($request->id);
+       
+        $data = $request->validated();
         if ($request->hasFile('image')) {
             $filenameWithExt = $request->file('image')->getClientOriginalName();
             //Get just filename
@@ -82,15 +83,11 @@ class PostController extends Controller
             // Upload Image
             $request->file('image')->storeAs('public/avatars', $fileNameToStore);
 
-            $updatePost['image'] = $fileNameToStore;
-           
-        } 
-        $updatePost->title = $request->get('title');
-        $updatePost->description = $request->get('description');
-        $updatePost->content = $request->get('content');
-        $updatePost->slug = $request->get('slug');
-        $updatePost->id_category = $request->get('id_category');
-        $updatePost->save();
+            $data['image'] = $fileNameToStore;
+        }
+        
+        $post = $this->post->update($data, $request->id);
+        $post->save(); 
         return redirect()->route('post.select')->with('success', Lang::get('messages.update', ['model' => 'Update post']));
     }
 
@@ -102,13 +99,19 @@ class PostController extends Controller
     }
 
     public function search(Request $request)
-    {      
+    {
         $searchPostHome = Post::with('categories')
-        ->where('title', 'LIKE', "%$request->search%")->get();
-        return view('frontend.search.index',compact('searchPostHome'));
+            ->where('title', 'LIKE', "%$request->search%")->get();
+        return view('frontend.search.index', compact('searchPostHome'));
     }
-    public function postDelete(Request $request) {       
+    public function postDelete(Request $request)
+    {
         $this->post->whereIn('id', explode(",", $request->ids))->delete();
         return response()->json(['success' => "Delete user successful"]);
+    }
+    public function callapi(Request $request)
+    {
+        $callApi = Post::get();
+        return response()->json(['api' => $callApi]);
     }
 }

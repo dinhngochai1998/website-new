@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\Frontend\Like;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
 use App\Models\Like;
-use App\Models\Customer;
 use App\Repositories\PostRepository;
-use App\Http\Requests\Post\StorePostRequest;
-use App\Repositories\CustomerPostRepository;
 use App\Http\Controllers\Controller;
 use Auth;
 

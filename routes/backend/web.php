@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
-Route::group(['middleware' => 'role:developer || manager'], function () {
-
+Route::group(['middleware' => 'admin'], function () {
+   
     Route::prefix('/dashboard')->name('dashboard.')->group(function () {
         Route::get('/', 'App\Http\Controllers\Backend\Dashboard\DashboardController@index')->name('show');
+        Route::get('/set', 'App\Http\Controllers\Backend\Dashboard\DashboardController@setSession');
     });
     Route::prefix('category')->name('category.')->group(function () {
         Route::get('/', 'App\Http\Controllers\Backend\Category\CategoryController@index')->name('index');
@@ -61,4 +63,8 @@ Route::group(['middleware' => 'role:developer || manager'], function () {
 Route::prefix('login')->name('login.')->group(function () {
     Route::get('/', 'App\Http\Controllers\Auth\LoginController@index')->name('index');
     Route::post('/', 'App\Http\Controllers\Auth\LoginController@login')->name('login');
+});
+Route::prefix('resetpassword')->name('resetpassword.')->group(function () {
+    Route::get('/', 'App\Http\Controllers\Auth\ResetPasswordController@index')->name('index');
+    Route::post('/', 'App\Http\Controllers\Auth\ResetPasswordControllerController@login')->name('reset');
 });

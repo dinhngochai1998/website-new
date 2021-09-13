@@ -42,8 +42,8 @@ class LogoutController extends Controller
 
     public function logout()
     {
-        if (Auth::user()) {
-            Auth::logout();
+        if (Auth::guard('web')->user()) {
+            Auth::guard('web')->logout();
             return redirect()->route('login.index');
         }
     }

@@ -26,3 +26,4 @@ padding : 50px 0;
     color: red;
     font-size: 15px;
 }
+.modal-footer {   border-top: 0px; }

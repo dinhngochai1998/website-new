@@ -182,6 +182,7 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         App\Providers\PermissionsServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
     ],
 
@@ -237,7 +238,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        
+
     ],
 
 ];
