@@ -33,6 +33,7 @@ class CustomerController extends Controller
     {
         
         $getInfo = Socialite::driver($provider)->user();
+       
         $user = $this->registerGoogleLoginUser($getInfo, $provider);
         
 

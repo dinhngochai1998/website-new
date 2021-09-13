@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class AdminMiddleware
+class ApiMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,8 +17,8 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::guard('web')->user()) {
-            return redirect()->route('login.index');
+        if (!auth()->user()) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
         return $next($request);
     }

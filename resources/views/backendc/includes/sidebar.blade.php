@@ -171,11 +171,11 @@
                       <i class="nav-icon fas fa-cogs"></i>
                           <p>
                               Setting
-                              
+                              <i class="fas fa-angle-left right"></i>
                           </p>
                       </a>
                       <ul class="nav nav-treeview">
-                          <li class="nav-item">
+                          <li class="nav-item" style="margin-bottom: 20px;">
                               <a href="{{ route('category.select') }}" class="nav-link">
 
                                   <a href="#" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"> <i class="far fa-circle nav-icon"></i>Logout</a>

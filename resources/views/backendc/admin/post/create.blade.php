@@ -72,7 +72,7 @@
                                     <script>
                                         CKEDITOR.replace('content');
                                     </script>
-                                      @if ($errors->has('content'))
+                                    @if ($errors->has('content'))
                                     <div class="mt-1 text-red-500">
                                         {{ $errors->first('content') }}
                                     </div>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <input type="submit" value="Edit Post" class="btn btn-success float-left mr-2" />
+                        <input type="submit" value="Create Post" class="btn btn-success float-left mr-2" />
                         <a href="#" class="btn btn-secondary float-left">Cancel</a>
                     </div>
                 </div>

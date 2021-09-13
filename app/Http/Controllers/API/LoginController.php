@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -38,16 +38,19 @@ class LoginController extends Controller
 
         return view('auth.login');
     }
-    public function login(StoreUserRequest $request)
+
+    public function login(Request $request)
     {
-        
-        $user = $request->validated();
-        
-        if (Auth::guard('web')->attempt($user)) {
-            return redirect()->route('dashboard.show')->with('status', lang::get('messages.succssefull'));
+        // $user = $request->validated();
+        $user = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+
+        if (!$token = Auth::attempt($user)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         } else {
-            return redirect()->route('login.index')->with('status', lang::get('messages.error_password'));
+            return $this->respondWithToken($token);
         }
     }
-
 }
