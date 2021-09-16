@@ -24,6 +24,7 @@ class PostController extends Controller
     }
     public function index()
     {
+
         $categories = $this->category->get();
         return view('backendc.admin.post.create', compact('categories'));
     }
@@ -44,6 +45,8 @@ class PostController extends Controller
             $data['image'] = $fileNameToStore;
         }
         $NewPost = $this->post->create($data);
+        $NewPost->status_schedule = $request->get('status_schedule');
+        $NewPost->publish_at = $request->get('publish_at');
         $NewPost->save();
         return redirect()->route('post.select')->with('success', Lang::get('messages.create', ['model' => 'Post']));
     }
@@ -86,6 +89,8 @@ class PostController extends Controller
         }
 
         $post = $this->post->update($data, $request->id);
+        $post->status_schedule = $request->get('status_schedule');
+        $post->publish_at = $request->get('publish_at');
         $post->save();
 
         return redirect()->route('post.select')->with('success', Lang::get('messages.update', ['model' => 'Update post']));

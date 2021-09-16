@@ -59,9 +59,13 @@
                                             </th>
                                             <th>@sortablelink('title')</th>
                                             <th>@sortablelink('categories.name')</th>
+                                            <th>Status_schedule</th>
+                                            <th>publish_at</th>
+                                            <th>Created_at</th>
                                             <th>image</th>
+
                                             <th style="padding-left: 50px;">Action</th>
-                                        </tr>                 
+                                        </tr>
                                     </thead>
                                     <tbody class="list-post">
                                         @include('backendc.admin.post.ajax.data')

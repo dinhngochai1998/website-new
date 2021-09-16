@@ -183,6 +183,7 @@ return [
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         App\Providers\PermissionsServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
     ],
 

@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePostRequest extends FormRequest {
-    
+class StorePostRequest extends FormRequest
+{
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,11 +32,13 @@ class StorePostRequest extends FormRequest {
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|',
             'id_category' => 'required',
             'sort' => 'nullable',
+            'status_schedule' => 'nullable',
+            'publish_at' => 'nullable',
         ];
-        
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'title.required' => 'Xin vui lòng nhập title',
             'title.max' => 'title không được quá 255 kí tự',
@@ -50,4 +54,3 @@ class StorePostRequest extends FormRequest {
         ];
     }
 }
-        

@@ -18,13 +18,13 @@ class Post extends Model
     const POST_CULTURAL = 5;
     const POST_HOTNEWS = 7;
     const POST_PROJECT = 8;
-    
+
 
     protected $fillable = [
-        'title', 'description','content','image','slug','id_category','sort','customer_status','status',
+        'title', 'description', 'content', 'image', 'slug', 'id_category', 'sort', 'customer_status', 'status', 'stuatus_schedule'
     ];
     public $sortable = ['title'];
- 
+
     public function categories()
     {
         return $this->belongsTo(Category::class, 'id_category');
@@ -39,11 +39,11 @@ class Post extends Model
         return $this->hasMany(Like::class, 'post_id', 'id');
     }
 
-    public static function getNewsOfCategory($idCate) {
-       return self::select('posts.*', 'category.name')->join('category', function($join) {
+    public static function getNewsOfCategory($idCate)
+    {
+        return self::select('posts.*', 'category.name')->join('category', function ($join) {
             $join->on('posts.id_category', '=', 'category.id');
-        })->where('category.id', $idCate)
-           ;
+        })->where('category.id', $idCate);
     }
     // public static function getPost($notgetcate) {
     //     return self::select('posts.*', 'category.name')->join('category', function($join) {

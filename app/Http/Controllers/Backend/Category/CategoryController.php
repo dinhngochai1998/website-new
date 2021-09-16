@@ -20,15 +20,13 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->user()->can('create-tasks')) {
-            $category = Category::whereNull('parent_id')->get();
-            return view('backendc.admin.category.create', compact('category'));
-        }
+        $category = $this->category->getDataCategory();
+        return view('backendc.admin.category.create', compact('category'));
     }
 
     public function create(StoreCategoryRequest $request)
     {
-        $NewCategory = $this->category->create($request->validated());
+        $NewCategory = $this->category->createCategory($request->validated());
 
         return redirect()->route('category.select')->with('success', Lang::get('message.create', ['model' => 'Category']));
     }
