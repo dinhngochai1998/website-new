@@ -1,4 +1,5 @@
 @foreach($customer as $value)
+
 <tr>
     <td>
         <div class="form-group">
@@ -8,7 +9,7 @@
         </div>
     </td>
     <td>{{ $value->name }}</td>
-    <td>{{ $value->email }}</td>
+    <td>{{ hiddenEmail($value->email) }}</td>
     <td><img src="{{ $value->avatar }}" width="100px" alt=""></td>
     <td>
         <a href="" class="btn btn-warning btn-sm btn-warning-edit"><i class="fas fa-eye"></i> View</a>

@@ -78,6 +78,16 @@
                                     </div>
                                     @endif
                                 </div>
+                                <div class="form-group">
+                                    <label for="inputName">Schedule</label>
+                                    <select name="status_schedule" id="">
+                                        <option value="public">Public</option>
+                                        <option value="schedule">Schedule</option>
+                                        <option value="disable">Disable</option>
+                                    </select>
+                                </div>
+                                <label for="birthdaytime">Chọn giờ đăng bài</label>
+                                <input type="datetime-local" id="" name="publish_at">
                             </div>
                             <!-- /.card-body -->
                         </div>

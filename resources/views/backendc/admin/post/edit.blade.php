@@ -11,7 +11,7 @@
     @include('backendc.components.alert')
 
     <div class="content-wrapper" style="min-height: 1602px;">
-   
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
@@ -57,7 +57,7 @@
                                     <select name="id_category" id="">
                                         <option value="">Chọn chuyên mục</option>
                                         @foreach ($getCategory as $value)
-                                                                       
+
                                         <option value="{{ $value->id }}">{{ $value->name }} </option>
                                         @endforeach
                                     </select>
@@ -79,6 +79,16 @@
                                         CKEDITOR.replace('content');
                                     </script>
                                 </div>
+                                <div class="form-group">
+                                    <label for="inputName">Schedule</label>
+                                    <select name="status_schedule" id="">
+                                        <option value="public">Public</option>
+                                        <option value="schedule">Schedule</option>
+                                        <option value="disable">Disable</option>
+                                    </select>
+                                </div>
+                                <label for="birthdaytime">Chọn giờ đăng bài</label>
+                                <input type="datetime" value="{{ $editPost->publish_at }}" id="" name="publish_at">
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -90,7 +100,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputFile">Image</label>
                                     <div class="input-group">
-                                        <input type="file" id="adBanner" class="form__file-control" name="image" />
+                                        <input type="file" value="{{ old('image') ?? $editPost->image}}" id="adBanner" class="form__file-control" name="image" />
                                     </div>
                                     @if ($errors->has('image'))
                                     <div class="mt-1 text-red-500">
@@ -118,8 +128,7 @@
 </div>
 
 @endsection
-<script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('backend/js/jquery-1.8.3.min.js') }}"></script>
+
 
 <script language="javascript">
     function ChangeToSlug() {

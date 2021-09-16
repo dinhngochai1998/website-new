@@ -23,8 +23,8 @@
                                       <img alt="" src="">
                                   </span>
                                   <span class="username">
-                                      @if (Auth::user())
-                                      <span>{{ Auth::user()->name }}</span>
+                                      @if (Auth::guard('web'))
+                                      <span>{{ Auth::guard('web')->user()->name }}</span>
                                       @endif
                                   </span>
                                   <b class="caret"></b>
@@ -165,10 +165,10 @@
                           </p>
                       </a>
                   </li>
-                
+
                   <li class="nav-item">
                       <a href="" class="nav-link">
-                      <i class="nav-icon fas fa-cogs"></i>
+                          <i class="nav-icon fas fa-cogs"></i>
                           <p>
                               Setting
                               <i class="fas fa-angle-left right"></i>

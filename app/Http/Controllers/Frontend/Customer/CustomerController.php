@@ -31,11 +31,11 @@ class CustomerController extends Controller
     }
     public function callback($provider)
     {
-        
+
         $getInfo = Socialite::driver($provider)->user();
-       
+
         $user = $this->registerGoogleLoginUser($getInfo, $provider);
-        
+
 
         $data = [
             'email' => $user->email,
@@ -61,6 +61,8 @@ class CustomerController extends Controller
                 'avatar' => $data->avatar,
             ]);
         }
+        $customer->name = $data->name;
+        $customer->save();
         return $customer;
     }
     public function logout(Request $request)
