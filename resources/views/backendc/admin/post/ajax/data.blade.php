@@ -1,4 +1,5 @@
-@foreach($getAllPost as $value)
+@foreach($getAllPost ?? [] as $value)
+
 <tr>
     <td>
         <div class="form-group">

@@ -18,7 +18,7 @@ class Like extends Migration
             $table->integer('like')->default(0);
             $table->integer('customer_id')->unsigned()->nullable();
             $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade');
-            $table->integer('post_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('post_id')->unsigned()->nullable();
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->timestamps();
         });

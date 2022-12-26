@@ -29,7 +29,7 @@ class StorePostRequest extends FormRequest
             'slug' => 'required|max:255',
             'content'    => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'id_category' => 'required',
             'sort' => 'nullable',
             'status_schedule' => 'nullable',

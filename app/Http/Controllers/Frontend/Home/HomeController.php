@@ -8,17 +8,15 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Customer;
 use App\Http\Controllers\Controller;
-use Auth;
 use App\Http\Requests\Category\StoreCategoryRequest;
+use Illuminate\Support\Facades\Auth;
 
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $getPost = [];
-        $getPost = Post::Where('status_schedule', 'public')
-            ->orderBy('created_at', 'DESC')->take(1)->first();
+        $getPost = Post::orderBy('created_at', 'DESC')->take(1)->first();
         $getPostDataPaginate = Post::paginate(5);
         // $like = Post::with('like')->where(['id_customer' => Auth::guard('customer')->user()->id])->first();
         if ($user = Auth::guard('customer')->user()) {
@@ -26,18 +24,19 @@ class HomeController extends Controller
             if ($getPost) {
                 $getPostData = Post::with(['categories', 'like' => function ($q) use ($user) {
                     return $q->select('like AS l', 'post_id', 'customer_id')->where(['like' => 1, 'customer_id' => $user->id]);
-                }])->whereNotIn('id', [$getPost->id])->Where('status_schedule', 'public')->orderBy('created_at', 'DESC')->paginate(4);
+                }])->whereNotIn('id', [$getPost->id])->orderBy('created_at', 'DESC')->paginate(4);
             }
+
         } else {
-            $getPostData = Post::with('categories')->whereNotIn('id', [$getPost->id])->Where('status_schedule', 'public')->orderBy('created_at', 'DESC')->simplePaginate(4);
+            $getPostData = Post::with('categories')->whereNotIn('id', [$getPost->id ?? null])->orderBy('created_at', 'DESC')->simplePaginate(4);
         }
 
 
         // dd($getPostData[0]->like[0]['l']);
-        $getPostHighLights = Post::where('status_schedule', 'public')->orderBy('count_view', 'DESC')->take(4)->get();
+        $getPostHighLights = Post::orderBy('count_view', 'DESC')->take(4)->get();
         $getPostNews = [];
         if ($getPostNews) {
-            $getPostNews = Post::where('status_schedule', 'public')->whereNotIn('id', [$getPost->id])->orwhere('status', '=', '1')->orderBy('created_at', 'DESC')->take(3)->get();
+            $getPostNews = Post::whereNotIn('id', [$getPost->id])->orwhere('status', '=', '1')->orderBy('created_at', 'DESC')->take(3)->get();
         } else {
             $getPostNews = [];
         }
@@ -49,6 +48,7 @@ class HomeController extends Controller
         if ($getPostHotNews) {
             $getPostHotNews1 = Post::where('id_category', Post::POST_HOTNEWS)->whereNotIn('id', [$getPostHotNews->id])->orderBy('created_at', 'DESC')->take(3)->get();
         }
+        $getRecruitment1 = null;
         $getRecruitment = Post::getNewsOfCategory(Post::POST_SPORT)->where('status', '=', '1')->first();
         if ($getRecruitment) {
             $getRecruitment1 = Post::where('id_category', Post::POST_SPORT)->orWhere('status', '=', '1')->whereNotIn('id', [$getRecruitment->id])->orderBy('created_at', 'DESC')->take(3)->get();
@@ -93,10 +93,12 @@ class HomeController extends Controller
     public function category(Request $request)
     {
         $category = Category::where('slug', $request->slug)->first();
+
         if (!$category) {
             abort(404);
         }
-        $posts = Post::Where('status_schedule', '=', 'public')->orWhere('id_category', $category->id)->orderby('created_at', 'DESC')->get();
+
+        $posts = Post::orWhere('id_category', $category->id)->orderby('created_at', 'DESC')->get();
 
         $getPostHighLights = Post::where('status_schedule', 'public')->orderBy('count_view', 'DESC')->where('status_schedule', 'public')->take(3)->get();
         $getPostNews = Post::where('status_schedule', 'public')->orderBy('created_at', 'DESC')->take(3)->get();

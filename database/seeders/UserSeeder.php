@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-//model 
+//model
 
 use Illuminate\Database\Seeder;
 
@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make(12345678),
         ]);
     }
 }

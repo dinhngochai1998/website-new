@@ -30,6 +30,7 @@ class PostController extends Controller
     }
     public function create(StorePostRequest $request)
     {
+
         $data = $request->validated();
         if ($request->hasFile('image')) {
             $filenameWithExt = $request->file('image')->getClientOriginalName();
@@ -44,9 +45,11 @@ class PostController extends Controller
 
             $data['image'] = $fileNameToStore;
         }
+//        dd( $this->post);
         $NewPost = $this->post->create($data);
-        $NewPost->status_schedule = $request->get('status_schedule');
-        $NewPost->publish_at = $request->get('publish_at');
+//        dd($NewPost);
+        $NewPost->status_schedule = $request->get('status_schedule') ?? null;
+        $NewPost->publish_at = $request->get('publish_at') ?? null;
         $NewPost->save();
         return redirect()->route('post.select')->with('success', Lang::get('messages.create', ['model' => 'Post']));
     }
@@ -60,6 +63,7 @@ class PostController extends Controller
             $view = view('backendc.admin.post.ajax.data', compact('getAllPost'))->render();
             return response()->json(['html' => $view]);
         }
+
         return view('backendc.admin.post.index', compact('getAllPost'));
     }
 
@@ -107,7 +111,9 @@ class PostController extends Controller
     {
         $searchPostHomePage = Post::with('categories')
             ->where('title', 'LIKE', "%$request->search%")->get();
-        return view('frontend.search.index', compact('searchPostHome'));
+//        $searchPostHome     =;
+
+        return view('frontend.search.index', compact('searchPostHomePage'));
     }
     public function postDelete(Request $request)
     {

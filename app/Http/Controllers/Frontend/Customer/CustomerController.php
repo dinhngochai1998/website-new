@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Lang;
 use App\Models\Customer;
 use App\Models\User;
-use Socialite;
+use Laravel\Socialite\Facades\Socialite;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 

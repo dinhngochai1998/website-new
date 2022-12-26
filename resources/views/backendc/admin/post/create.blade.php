@@ -47,6 +47,15 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
+                                    <label for="inputName">Slug</label>
+                                    <input type="file"  name="image" value=""  class="form-control" required />
+                                    @if ($errors->has('image'))
+                                        <div class="mt-1 text-red-500">
+                                            {{ $errors->first('image') }}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="form-group">
                                     <label for="inputName">Chuyên mục</label>
                                     <select name="id_category" id="">
                                         <option value="">Chọn chuyên mục</option>
@@ -92,26 +101,9 @@
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
+
                     </div>
-                    <div class="col-md-6">
-                        <div class="card card-secondary">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Image</label>
-                                    <div class="input-group">
-                                        <input type="file" id="adBanner" class="form__file-control" name="image" />
-                                    </div>
-                                    @if ($errors->has('image'))
-                                    <div class="mt-1 text-red-500">
-                                        {{ $errors->first('image') }}
-                                    </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -133,7 +125,7 @@
     function ChangeToSlug() {
         var title, slug;
 
-        //Lấy text từ thẻ input title 
+        //Lấy text từ thẻ input title
         title = document.getElementById("title").value;
 
         //Đổi chữ hoa thành chữ thường
