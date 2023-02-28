@@ -7,8 +7,8 @@ services:
             context: .
             dockerfile: Dockerfile
         volumes:
-            - .:/code
-        working_dir: /code
+            - .:/website-new
+        working_dir: /website-new
         depends_on:
             - mongodb
             - mysql
