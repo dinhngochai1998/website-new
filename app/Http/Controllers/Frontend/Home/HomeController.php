@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend\Home;
 
+use App\Models\User;
+use App\Solid\Employee\UseSingleResposibilityPrinciple\Developer;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Post;
@@ -10,12 +12,17 @@ use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreCategoryRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Solid\Employee\UseSingleResposibilityPrinciple\SaleSoftware;
 
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
+//        $a = [6, 10, 3,100, 1000];
+//        return $this->max($a);
+//        User::query()->where('email', 'hai11212112sdas22@gmail.com')->update(['email'=> 'haidn@gmail.com', 'password' => Hash::make(12345678)]);
         $getPost = Post::orderBy('created_at', 'DESC')->take(1)->first();
         $getPostDataPaginate = Post::paginate(5);
         // $like = Post::with('like')->where(['id_customer' => Auth::guard('customer')->user()->id])->first();
@@ -103,5 +110,79 @@ class HomeController extends Controller
         $getPostHighLights = Post::where('status_schedule', 'public')->orderBy('count_view', 'DESC')->where('status_schedule', 'public')->take(3)->get();
         $getPostNews = Post::where('status_schedule', 'public')->orderBy('created_at', 'DESC')->take(3)->get();
         return view('frontend.category.in', compact('posts', 'category', 'getPostHighLights', 'getPostNews', 'getPostHighLights'));
+    }
+
+
+    function bubbleSort($arr) {
+        $n = count($arr);
+        for($i = 0; $i < $n-1; $i++) {
+            for($j = 0; $j < $n-$i-1; $j++) {
+                if($arr[$j] > $arr[$j+1]) {
+                    $temp = $arr[$j];
+                    $arr[$j] = $arr[$j+1];
+                    $arr[$j+1] = $temp;
+                }
+            }
+        }
+        return $arr;
+    }
+
+    function findBalancePoint($arr) {
+        $sum = array_sum($arr); // tính tổng các phần tử trong mảng
+        $leftSum = 0; // biến tính tổng các phần tử bên trái của một phần tử
+        $a = [7, 3, 8, 10];
+        for ($i = 0; $i < count($arr); $i++) {
+
+            // tính tổng các phần tử bên trái của phần tử thứ i
+            $sum -= $arr[$i]; // loại bỏ phần tử thứ i khỏi tổng các phần tử
+            if ($leftSum == $sum) {
+                // nếu tổng các phần tử bên trái bằng tổng các phần tử bên phải
+                return $i; // trả về vị trí cân bằng
+            }
+            $leftSum += $arr[$i]; // cộng thêm phần tử thứ i vào tổng các phần tử bên trái
+        }
+        // không tìm thấy vị trí cân bằng nào
+        return -1;
+    }
+
+    public function caculatePrice($arr,$price) {
+        $a = null;
+        $arrPrice = [];
+        for($i = 0; $i < count($arr); $i++) {
+            if($arr[$i] == $price) {
+                $a = $i;
+            }
+            if($i >= $a) {
+                $pri = $price - $arr[$i];
+                if($pri > 0) {
+                    $arrPrice[] = $pri;
+                }
+            }
+        }
+
+        if(empty($arrPrice)) {
+            return [];
+        }
+        $min = $arrPrice[0];
+
+        for($j = 1; $j > count($arrPrice); $j++) {
+            if($arrPrice[$i] < $min) {
+                $min = $arrPrice[$i];
+            }
+        }
+        return $min;
+    }
+
+    public function max($arr) {
+        $count = count($arr);
+
+        $max = $arr[0];
+
+        for ($i = 1; $i < $count; $i++) {
+            if($arr[$i] > $max) {
+                $max = $arr[$i];
+            }
+        }
+        return $max;
     }
 }
