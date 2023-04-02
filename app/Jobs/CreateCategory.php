@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Category;
 use App\Models\Contact;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -13,18 +14,18 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailContact;
 
 
-class SendEmailContact implements ShouldQueue
+class CreateCategory implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    public $contact;
+    public $category;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($contact)
+    public function __construct($category)
     {
-        $this->contact = $contact;
+        $this->category = $category;
     }
 
     /**
@@ -34,7 +35,7 @@ class SendEmailContact implements ShouldQueue
      */
     public function handle()
     {
-        Contact::query()->create($this->contact);
+        Category::query()->create($this->category);
 //       Mail::to($this->contact->email)->send(new SendMailContact($this->contact));
 
     }

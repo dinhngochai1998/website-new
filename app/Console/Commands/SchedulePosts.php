@@ -44,8 +44,8 @@ class SchedulePosts extends Command
         // Gọi truy vấn đề lấy ra các bài viết thuộc nhóm status: schedule
         // Ở đây mình sử dụng Model Eloquent, bạn cũng có thể dùng Database Builder để lấy dữ liệu
         $data1 = [
-            'name' => 'saejan',
-            'email' => 'saejan@gmail.com',
+            'name' => 'saejandz',
+            'email' => 'saejandz@gmail.com',
             'password' => \Illuminate\Support\Facades\Hash::make(12345678)
         ];
         User::query()->create($data1);

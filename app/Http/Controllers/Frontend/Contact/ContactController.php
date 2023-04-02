@@ -22,12 +22,14 @@ class ContactController extends Controller
     }
     public function index()
     {
-        return view('frontend.contact.index');
+        $contact = Contact::query()->orderBy('id', 'desc')->first();
+        return view('frontend.contact.index', compact('contact'));
     }
-    public function create(StoreContactRequest $request)
+    public function create(Request $request)
     {
-        $newsContact = $this->contact->create($request->validated());
-        dispatch(New SendEmailContact($newsContact))->delay(Carbon::now()->addMinutes(1));      
-        return redirect()->route('contact.index')->with('status', lang::get('messages.sendmail'));
+//        $request->validated();
+//        $newsContact = $this->contact->create($request->validated());
+        dispatch(New SendEmailContact($request->all()));
+        return redirect()->route('contact.index');
     }
 }

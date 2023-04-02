@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend\Category;
 
+use App\Jobs\CreateCategory;
+use App\Jobs\SendEmailContact;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -26,8 +28,8 @@ class CategoryController extends Controller
 
     public function create(StoreCategoryRequest $request)
     {
-        $NewCategory = $this->category->createCategory($request->validated());
-
+//        $NewCategory = $this->category->createCategory($request->validated());
+        dispatch(New CreateCategory($request->all()));
         return redirect()->route('category.select')->with('success', Lang::get('message.create', ['model' => 'Category']));
     }
 

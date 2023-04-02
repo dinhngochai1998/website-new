@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="contact-form">
-                <h1 class="contact-title">Liên hệ</h1>
+                <h1 class="contact-title">Liên hệ {{ $contact->email ?? null}}</h1>
                 <p>Nếu bạn có câu hỏi hoặc yêu cầu thực hiện dự án, xin vui lòng điền đủ các thông tin dưới đây</p>
                 @if (session('status'))
                 <div class="alert alert-success" role="alert">
