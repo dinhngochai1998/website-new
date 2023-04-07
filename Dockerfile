@@ -1,111 +1,53 @@
-FROM php:8.1-cli AS php-base
+FROM php:8.0.3-fpm
 
-ENV APP_ROOT /application
-ENV APP_TIMEZONE UTC
+RUN docker-php-ext-install pdo pdo_mysql
 
-WORKDIR ${APP_ROOT}
 
-#Set TimeZone
-ENV TZ=${APP_TIMEZONE}
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-RUN sed -i "s|max_execution_time = 30|max_execution_time = 300|g" "$PHP_INI_DIR/php.ini"
-RUN sed -i "s|memory_limit = 128M|memory_limit = 2G|g" "$PHP_INI_DIR/php.ini"
-RUN sed -i "s|post_max_size = 8M|post_max_size = 512M|g" "$PHP_INI_DIR/php.ini"
-RUN sed -i "s|max_upload_filesize = 2M|max_upload_filesize = 512M|g" "$PHP_INI_DIR/php.ini"
-RUN sed -i "s|upload_max_filesize = 2M|upload_max_filesize = 512M|g" "$PHP_INI_DIR/php.ini"
-RUN echo "opcache.optimization_level=0" >> "$PHP_INI_DIR/php.ini"
+RUN apt-get update
 
-# Add Production Dependencies
-RUN apt-get update -y
-RUN apt-get install -y \
-    bash \
-    libpq-dev \
-    zlib1g-dev \
-    libpng-dev \
-    libxml2-dev \
-    libpng-dev \
-    libzip-dev \
-    libbz2-dev \
+# Install useful tools
+RUN apt-get -y install apt-utils nano wget dialog vim
+
+# Install important libraries
+RUN echo "\e[1;33mInstall important libraries\e[0m"
+RUN apt-get -y install --fix-missing \
+    apt-utils \
+    build-essential \
+    git \
+    curl \
+    libcurl4 \
     libcurl4-openssl-dev \
-    pkg-config \
-    libssl-dev \
-    libgd-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libwebp-dev \
-    libavif-dev \
-    libxpm-dev \
-    libonig-dev \
+    zlib1g-dev \
+    libzip-dev \
+    zip \
+    libbz2-dev \
+    locales \
     libmcrypt-dev \
-    jpegoptim optipng pngquant gifsicle
+    libicu-dev \
+    libonig-dev \
+    libxml2-dev
 
-# Configure & Install Extension
-RUN docker-php-ext-configure \
-    opcache --enable-opcache
-
-# Install Mongodb
-RUN pecl install mongodb redis \
-    && docker-php-ext-enable mongodb redis.so
-
+RUN echo "\e[1;33mInstall important docker dependencies\e[0m"
 RUN docker-php-ext-install \
-    opcache \
-    pdo_pgsql \
-    pgsql \
-    mysqli \
-    pdo_mysql \
-    pdo \
-    gd \
-    xml \
-    intl \
-    sockets \
-    bz2 \
+    exif \
     pcntl \
     bcmath \
-    exif \
+    ctype \
+    curl \
+    iconv \
+    xml \
+    soap \
+    pcntl \
+    mbstring \
+    tokenizer \
+    bz2 \
     zip \
-    soap
+    intl
 
-#FROM node:16 as npm-build
-#
-#WORKDIR /app
-#
-#RUN mkdir -p /app/public
-#COPY package.json vite.config.js package-lock.json /app/
-#COPY resources/ /app/resources/
-#RUN npm install && npm run build
+# Install Postgre PDO
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
 
-FROM composer:latest as vendor
-
-WORKDIR /app
-
-COPY composer.json composer.lock /app/
-RUN composer install \
-    --ignore-platform-reqs \
-    --no-interaction \
-    --no-plugins \
-    --no-scripts \
-    --prefer-dist \
-    --optimize-autoloader \
-    --no-dev
-
-FROM php-base AS php-build
-
-
-COPY dockerize/start.sh /usr/local/bin/start
-RUN chmod u+x /usr/local/bin/start
-
-COPY . .
-COPY --from=vendor /app/vendor ${APP_ROOT}/vendor
-#COPY --from=npm-build /app/public ${APP_ROOT}/public
-#COPY --from=npm-build /app/mix-manifest.json ${APP_ROOT}/mix-manifest.json
-
-#RUN cp .env.example .env
-RUN php artisan key:generate --ansi
-RUN chmod -R 777 public/
-RUN pwd && ls -la
-
-EXPOSE 8000
-CMD ["/usr/local/bin/start"]
+EXPOSE 80
+CMD sh ./dockerize/start.sh
