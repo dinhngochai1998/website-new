@@ -3,7 +3,7 @@ version: '3.8'
 services:
     nginx:
         image: nginx:alpine
-        container_name: website_news
+        container_name: nginx
         ports:
             - "80:80"
         volumes:
@@ -15,7 +15,7 @@ services:
     #Database Service
     db:
         image: mysql
-        container_name: mysql_website_news
+        container_name: mysql
         volumes:
             - ./mysql/data:/var/lib/mysql
         ports:
@@ -50,7 +50,7 @@ services:
     #phpMyAdmin Service
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
-        container_name: phpmyadmin_website_news
+        container_name: phpmyadmin
         ports:
             - "3400:80"
         depends_on:

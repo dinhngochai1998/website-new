@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# coppy env
-RUN cp .env.example .env
-
   echo "App clear..."
   chmod -R 777 storage \
   && php artisan migrate --force \
