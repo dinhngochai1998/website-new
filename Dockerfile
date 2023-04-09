@@ -1,5 +1,7 @@
 FROM php:8.0.3-fpm
 
+
+
 RUN docker-php-ext-install pdo pdo_mysql
 
 
@@ -47,13 +49,17 @@ RUN docker-php-ext-install \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+RUN apt-get update
 
 # Install Postgre PDO
 RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
 
+COPY dockerize/start.sh /usr/local/bin/start
+RUN chmod u+x /usr/local/bin/start
 
 
 EXPOSE 8000
-CMD sh ./dockerize/start.sh
+#CMD sh ./dockerize/start.sh
+CMD ["/usr/local/bin/start"]
