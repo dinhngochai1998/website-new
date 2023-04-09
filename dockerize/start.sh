@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+  composer install
+
   echo "App clear..."
   chmod -R 777 storage \
   && php artisan migrate --force \
