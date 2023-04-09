@@ -53,8 +53,7 @@ RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
 
-# coppy env
-RUN cp .env.example .env
+
 
 EXPOSE 8000
 CMD sh ./dockerize/start.sh
