@@ -3,7 +3,7 @@ version: '3.8'
 services:
     nginx:
         image: nginx:alpine
-        container_name: nginx_website_news
+        container_name: website_news
         ports:
             - "80:80"
         volumes:
@@ -14,12 +14,12 @@ services:
             - db
     #Database Service
     db:
-        image : mysql
-        container_name : mysql_website_news
+        image: mysql
+        container_name: mysql_website_news
         volumes:
             - ./mysql/data:/var/lib/mysql
         ports:
-            - "33306:3306"
+            - "3306:3306"
         environment:
             MYSQL_DATABASE: blog
             MYSQL_ROOT_PASSWORD: password
@@ -52,7 +52,7 @@ services:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin_website_news
         ports:
-            - "33400:80"
+            - "3400:80"
         depends_on:
             - db
     #    pgadmin:
@@ -71,10 +71,10 @@ services:
             context: .
             dockerfile: Dockerfile
         ports:
-            - "80:80"
+            - "8000:8000"
         volumes:
-            - .:/var/www/docker-laravel
-        working_dir: /var/www/docker-laravel
+            - .:/var/www/website-new
+        working_dir: /var/www/website-new
 
 
 
