@@ -22,7 +22,7 @@
                <div class="app-title">
                   <span>Login</span>
                </div>
-               <div class="app-contact">CONTACT INFO : Sae Jan 0355777573 | Email:dinhngochai1900@gmail.com| dinh hong son</div>
+               <div class="app-contact">CONTACT INFO : Sae Jan 0355777573 | Email:dinhngochai1900@gmail.com| dinh  hai</div>
             </div>
             <div class="screen-body-item">
                @include('components.alert')
